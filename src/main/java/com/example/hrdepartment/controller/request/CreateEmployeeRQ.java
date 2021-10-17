@@ -1,6 +1,8 @@
 package com.example.hrdepartment.controller.request;
+
 import com.example.hrdepartment.model.Department;
 import lombok.*;
+
 import javax.validation.constraints.NotBlank;
 
 @Getter

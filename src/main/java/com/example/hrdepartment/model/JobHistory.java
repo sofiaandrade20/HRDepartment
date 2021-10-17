@@ -1,22 +1,26 @@
 package com.example.hrdepartment.model;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@Builder
+@Table(name = "JobHistory")
+@Entity
 public class JobHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     private String description;
     private String manager;
-    /*@ManyToOne
-    @MapsId("employeeId")
-    @JoinColumn(name = "employee_id")
-    private Employee employee;*/
+    private String employeeID;
+    @ManyToOne
+    @JoinColumn(name="jobID")
+    private Employee employee;
 }

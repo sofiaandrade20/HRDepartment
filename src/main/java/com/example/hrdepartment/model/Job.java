@@ -1,5 +1,7 @@
 package com.example.hrdepartment.model;
+
 import lombok.*;
+
 import javax.persistence.*;
 
 @Getter
@@ -8,7 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name ="Job")
+@Table(name = "Job")
 @Entity
 public class Job {
     @Id
@@ -17,4 +19,7 @@ public class Job {
     private String description;
     private Long maxSalary;
     private Long minSalary;
+    @ManyToOne
+    @JoinColumn(name="employeeID")
+    private Employee employee;
 }

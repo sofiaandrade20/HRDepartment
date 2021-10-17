@@ -1,6 +1,9 @@
 package com.example.hrdepartment.model;
+
 import lombok.*;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -9,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name ="Employee")
+@Table(name = "Employee")
 @Entity
 public class Employee {
     @Id
@@ -22,10 +25,10 @@ public class Employee {
     private String email;
     private Long currentSalary;
     //One to many -> One employee can have many job categories (eg.: when promoted)
-    /*@OneToMany(mappedBy = "jobHistory")
-    private List<JobHistory> jobHistoryList;
+    @OneToMany(mappedBy="employee",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Job> job = new ArrayList<>();
     //One to many -> One employee can have many job categories (eg.: when promoted)
-    @OneToMany(mappedBy = "job")
-    private List<Job> jobList;*/
+    @OneToMany(mappedBy="employee",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Job> jobHistory = new ArrayList<>();
 
 }
