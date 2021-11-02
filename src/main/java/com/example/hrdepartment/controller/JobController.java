@@ -1,4 +1,4 @@
-package com.example.hrdepartment.controller.response;
+package com.example.hrdepartment.controller;
 
 import com.example.hrdepartment.controller.request.CreateJobRQ;
 import com.example.hrdepartment.model.Job;
@@ -18,19 +18,21 @@ public class JobController {
         this.jobService = jobService;
     }
 
+    //Get all jobs
     @GetMapping(value = "/job")
     public List<Job> getJobList() {
         return jobService.findAll();
     }
 
+    //Create a job
     @PostMapping(value = "/job", consumes = "application/json")
     public List<Job> addJob(@RequestBody @Valid List<CreateJobRQ> createJobRQ) {
         return jobService.save(createJobRQ);
     }
 
+    //Delete a job
     @DeleteMapping(path = "/job/{id}")
     public void deleteJob(@PathVariable(value = "id") Long jobId) {
         jobService.deleteById(jobId);
     }
-
 }

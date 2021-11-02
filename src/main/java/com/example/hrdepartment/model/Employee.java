@@ -24,9 +24,11 @@ public class Employee {
     private Long age;
     private String email;
     private Long currentSalary;
+
     //One to many -> One employee can have many job categories (eg.: when promoted)
     @OneToMany(mappedBy="employee",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Job> job = new ArrayList<>();
+
     //One to many -> One employee can have many job categories (eg.: when promoted)
     @OneToMany(mappedBy="employee",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Job> jobHistory = new ArrayList<>();

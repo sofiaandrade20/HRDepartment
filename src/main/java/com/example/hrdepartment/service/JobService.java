@@ -25,12 +25,15 @@ public class JobService {
     }
 
     //Creates a new Job
-
     public List<Job> save(List<CreateJobRQ> createJobRQList) {
         List<Job> newJobList = new ArrayList<>();
         Job newJob;
         for (CreateJobRQ createJobRQ : createJobRQList) {
-            newJob = Job.builder().description(createJobRQ.getDescription()).maxSalary(createJobRQ.getMaxSalary()).minSalary(createJobRQ.getMinSalary()).build();
+            newJob = Job.builder()
+                    .description(createJobRQ.getDescription())
+                    .maxSalary(createJobRQ.getMaxSalary())
+                    .minSalary(createJobRQ.getMinSalary())
+                    .build();
             jobRepository.save(newJob);
             newJobList.add(newJob);
         }
@@ -41,5 +44,4 @@ public class JobService {
     public void deleteById(Long jobId) {
         jobRepository.deleteById(jobId);
     }
-
 }

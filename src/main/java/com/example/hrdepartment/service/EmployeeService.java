@@ -26,16 +26,23 @@ public class EmployeeService {
     }
 
     //Returns an employee attributes by id
-    public Employee findById(Long id) {
-        return employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFound("Employee doesn't exists."));
-    }
+        public Employee findById(Long id) {
+            return employeeRepository.findById(id)
+                    .orElseThrow(() -> new EmployeeNotFound("Employee doesn't exists."));
+        }
 
     //Creates a new Employee
     public List<Employee> save(List<CreateEmployeeRQ> createEmployeeRQList) {
         List<Employee> newEmployeeList = new ArrayList<>();
         Employee newEmployee;
         for (CreateEmployeeRQ createEmployeeRQ : createEmployeeRQList) {
-            newEmployee = Employee.builder().department(createEmployeeRQ.getDepartment()).name(createEmployeeRQ.getName()).age(createEmployeeRQ.getAge()).currentSalary(createEmployeeRQ.getCurrentSalary()).email(createEmployeeRQ.getEmail()).build();
+            newEmployee = Employee.builder()
+                    .department(createEmployeeRQ.getDepartment())
+                    .name(createEmployeeRQ.getName())
+                    .age(createEmployeeRQ.getAge())
+                    .currentSalary(createEmployeeRQ.getCurrentSalary())
+                    .email(createEmployeeRQ.getEmail())
+                    .build();
             employeeRepository.save(newEmployee);
             newEmployeeList.add(newEmployee);
         }
@@ -53,7 +60,8 @@ public class EmployeeService {
 
     //Updates current salary
     public Employee updateSalary(Long id, Long currentSalary) {
-        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFound("Employee doesn't exists."));
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new EmployeeNotFound("Employee doesn't exists."));
         employee.setCurrentSalary(currentSalary);
         return employeeRepository.save(employee);
     }

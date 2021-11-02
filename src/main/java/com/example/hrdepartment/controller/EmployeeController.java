@@ -1,4 +1,4 @@
-package com.example.hrdepartment.controller.response;
+package com.example.hrdepartment.controller;
 
 import com.example.hrdepartment.controller.request.UpdateSalaryRQ;
 import com.example.hrdepartment.model.Employee;
@@ -21,28 +21,32 @@ public class EmployeeController {
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
-
+    //Get all employees
     @GetMapping(value = "/employee")
     public List<Employee> getEmployeeList() {
         return employeeService.findAll();
     }
 
+    //Get employeee by id
     @GetMapping(value = "/employee/{id}")
     public Employee getEmployee(@PathVariable(value = "id") Long employeeId) {
         return employeeService.findById(employeeId);
     }
 
+    //Create a new employee
     @PostMapping(value = "/employee", consumes = "application/json")
-    public List<Employee> addEmployee(@RequestBody @Valid List<CreateEmployeeRQ> createEmployeeRQ) {
-        return employeeService.save(createEmployeeRQ);
-    }
+        public List<Employee> addEmployee(@RequestBody @Valid List<CreateEmployeeRQ> createEmployeeRQ) {
+            return employeeService.save(createEmployeeRQ);
+        }
 
+    //Update salary
     @PutMapping("/employee/{id}/currentSalary")
     public ResponseEntity updateCurrentSalary(@PathVariable Long id, @RequestBody UpdateSalaryRQ request) {
         final Employee updatedEmployee = employeeService.updateSalary(id, request.getCurrentSalary());
-        return ResponseEntity.created(URI.create("/employee/" + id + "/currentSalary")).body("Updated Salary");
+        return ResponseEntity.created(URI.create("employee" + id + "currentSalary")).body("Updated Salary");
     }
 
+    //Delete employee
     @DeleteMapping(path = "/employee/{id}")
     public void deleteEmployee(@PathVariable(value = "id") Long employeeId) {
         employeeService.deleteById(employeeId);

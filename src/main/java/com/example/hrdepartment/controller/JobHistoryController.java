@@ -1,4 +1,4 @@
-package com.example.hrdepartment.controller.response;
+package com.example.hrdepartment.controller;
 
 import com.example.hrdepartment.controller.request.CreateJobHistoryRQ;
 import com.example.hrdepartment.model.JobHistory;
@@ -17,18 +17,20 @@ public class JobHistoryController {
     public JobHistoryController(JobHistoryService jobHistoryService) {
         this.jobHistoryService = jobHistoryService;
     }
-
-    @GetMapping(value = "/jobHistory")
+    //Get all job history
+    @GetMapping(value = "/job-History")
     public List<JobHistory> getJobHistoryList() {
         return jobHistoryService.findAll();
     }
 
-    @PostMapping(value = "/jobHistory", consumes = "application/json")
+    //Create a new history
+    @PostMapping(value = "/job-History", consumes = "application/json")
     public List<JobHistory> addJobHistory(@RequestBody @Valid List<CreateJobHistoryRQ> createJobHistoryRQ) {
         return jobHistoryService.save(createJobHistoryRQ);
     }
 
-    @DeleteMapping(path = "/jobHistory/{id}")
+    //Delete a job history
+    @DeleteMapping(path = "/job-History/{id}")
     public void deleteJobHistory(@PathVariable(value = "id") Long jobHistoryId) {
         jobHistoryService.deleteById(jobHistoryId);
     }

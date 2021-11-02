@@ -28,7 +28,10 @@ public class JobHistoryService {
         List<JobHistory> newJobHistoryList = new ArrayList<>();
         JobHistory newJobHistory;
         for (CreateJobHistoryRQ createJobHistoryRQ : createJobHistoryRQList) {
-            newJobHistory = JobHistory.builder().description(createJobHistoryRQ.getDescription()).manager(createJobHistoryRQ.getManager()).build();
+            newJobHistory = JobHistory.builder()
+                    .description(createJobHistoryRQ.getDescription())
+                    .manager(createJobHistoryRQ.getManager())
+                    .build();
             jobHistoryRepository.save(newJobHistory);
             newJobHistoryList.add(newJobHistory);
         }
